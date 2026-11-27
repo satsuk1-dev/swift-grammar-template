@@ -1,6 +1,3 @@
-// week02 の演習を終えた main.swift を、このファイルに Upload files で上書きしてください。
-// 教材コードは swift-grammar-code の week02/main.swift を Raw 表示から全選択コピーして Xcode に貼ります。
-
 // week02: Optional
 // このプログラムは、week01 で作った名簿（名前から点数を引く辞書）を使って、
 // 名簿に載っている人と載っていない人を、落ちないように扱います。
@@ -159,3 +156,69 @@ check("演習3 鈴木は名簿にありません", judge(name: "鈴木", in: sco
 //  連鎖して呼ぶ         if (s != null) s.length();        s?.count
 //  標準ライブラリの型    Optional<String>（Java 8 以降）     T? は言語そのものの機能
 //  取り違えたとき        NullPointerException（実行時）      コンパイル時にエラー。! を書いたときだけ実行時に落ちる
+
+let taro = scoreOf["電子太郎"]
+print(type(of:taro)) //型を知る為のメソッド
+
+let suzuki = scoreOf["鈴木"]
+print(suzuki == nil)
+
+//print(taro + 10) //コンパイルエラー
+
+let name = "鈴木"
+if let score = scoreOf[name]{
+    print("\(name)は\(score)点です")
+} else {
+    print("\(name)は名簿にありません")
+} // 鈴木
+
+// 番外編：無理やり値がないOptional型にアクセスすると、、、
+//let work = scoreOf["鈴木"]!
+
+//予想1 いるからscore + 5
+if let score = scoreOf["山田一郎"]{
+    print(score + 5)
+} else {
+    print("いません")
+}// 96 ok
+
+//予想2 山田はいないからfalse → nil
+if let score = scoreOf["田中"]{
+    print(score + 5)
+} else {
+    print("いません")
+}// いません ok
+
+//予想3 花子が英語だから nil → true
+let hanako = scoreOf["電子花子"]
+print(hanako == nil)
+// false
+
+if let score = scoreOf["山田一郎"]{
+    print("山田一郎は\(score)点です")
+} else {
+    print("山田一郎は名簿にありません")
+}
+//山田一郎は91点です
+
+let who = "田中"
+if let score = scoreOf[who]{
+    print("\(who)は\(score)点です")
+} else {
+    print("\(who)は名簿にありません")
+}
+//田中は名簿にありません
+
+let student = "電子花子"
+if let score = scoreOf["電子花子"]{
+    if score >= 60{
+        print("合格です")
+    } else {
+        print("再テストです")
+    }
+} else {
+    print("名簿にありません")
+}
+//再テストです
+
+
